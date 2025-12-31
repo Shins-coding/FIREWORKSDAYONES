@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year 2026 - MASSIVE Fireworks</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow: hidden;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Arial Black', sans-serif;
+            height: 100vh;
+            position: relative;
+        }
+
+        .container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .new-year-text {
+            font-size: 4rem;
+            color: #ffd700;
+            text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 2s 1s forwards, glow 2s infinite alternate 3s;
+        }
+
+        .countdown {
+            font-size: 6rem;
+            color: #00ff88;
+            text-shadow: 0 0 30px #00ff88, 0 0 50px #4169e1;
+            opacity: 0;
+            transform: scale(0.5);
+            animation: countdownPop 2s 4s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px #ffd700, 0 0 40px #ff1493; }
+            100% { text-shadow: 0 0 30px #ffd700, 0 0 60px #ff1493, 0 0 100px #00ff88; }
+        }
+
+        @keyframes countdownPop {
+            0% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* MASSIVE FIREWORKS */
+        .firework {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 30px currentColor, 0 0 50px currentColor;
+        }
+
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px white;
+            animation: twinkle 4s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="new-year-text">HAPPY NEW YEAR, MGA FUCKING DAY ONES LABYU ALL AND PAKYU ALL!</h1>
+        <div class="countdown" id="countdown">2026</div>
+    </div>
+
+    <script>
+        // Create background stars
+        for (let i = 0; i < 150; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 4 + 's';
+            document.body.appendChild(star);
+        }
+
+        // Launch multiple fireworks at once
+        function launchFireworksBatch() {
+            for (let batch = 0; batch < 3; batch++) {  // 3 fireworks per batch
+                setTimeout(() => launchFirework(), batch * 100);
+            }
+        }
+
+        function launchFirework() {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            firework.style.left = Math.random() * 100 + '%';
+            firework.style.bottom = '0';
+            
+            const colors = ['#ff007f', '#00ff88', '#ffd700', '#ff6b35', '#4169e1', '#ff1493', '#00d4ff', '#ff00ff'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            firework.style.background = color;
+            firework.style.boxShadow = `0 0 40px ${color}, 0 0 60px ${color}`;
+            
+            document.body.appendChild(firework);
+
+            firework.animate([
+                { transform: 'translateY(0) scale(1)', opacity: 1 },
+                { transform: 'translateY(-800px) scale(1.5)', opacity: 0.8 },
+                { transform: 'translateY(-900px) scale(0.1)', opacity: 0 }
+            ], {
+                duration: 2000,
+                easing: 'ease-out'
+            }).onfinish = () => {
+                firework.remove();
+                explode(firework.style.left, firework.style.top);
+            };
+        }
+
+        function explode(x, y) {
+            // DOUBLE sparks for INSANE explosions (100+ total)
+            for (let i = 0; i < 70; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                spark.style.left = x;
+                spark.style.top = y;
+                
+                const colors = ['#ff007f', '#00ff88', '#ffd700', '#ff6b35', '#4169e1', '#ff1493', '#00d4ff', '#ff00ff', '#ffff00'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.background = color;
+                spark.style.boxShadow = `0 0 25px ${color}, 0 0 40px ${color}`;
+                
+                document.body.appendChild(spark);
+
+                const angle = (i / 70) * Math.PI * 2;
+                const distance = 150 + Math.random() * 150;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                spark.animate([
+                    { transform: 'scale(1.2) translate(0, 0)', opacity: 1 },
+                    { transform: `scale(0.5) translate(${dx}px, ${dy}px)`, opacity: 0 }
+                ], {
+                    duration: 1200 + Math.random() * 600,
+                    easing: 'ease-out'
+                }).onfinish = () => spark.remove();
+            }
+        }
+
+        // INSANE fireworks frequency - every 200ms with batches
+        setInterval(launchFireworksBatch, 200);
+        
+        // Initial barrage
+        for (let i = 0; i < 10; i++) {
+            setTimeout(launchFireworksBatch, i * 150);
+        }
+    </script>
+</body>
+</html>
